@@ -1,4 +1,4 @@
-package com.example.orderdemo.model.dto.mapper;
+package com.example.orderdemo.mapper;
 
 import com.example.orderdemo.model.dto.OrderDto;
 import com.example.orderdemo.model.entity.Order;

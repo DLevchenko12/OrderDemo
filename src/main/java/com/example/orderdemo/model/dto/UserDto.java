@@ -11,20 +11,15 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * A DTO for the {@link com.example.orderdemo.model.entity.User} entity
  */
 @Data
-@EqualsAndHashCode
-@ToString
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class UserDto implements Serializable {
-    @JsonProperty("id")
-    private final Long id;
+public class UserDto {
+    private final UUID id;
 
-    @JsonProperty("role")
     private final Role role;
 
     @JsonProperty("order_list")

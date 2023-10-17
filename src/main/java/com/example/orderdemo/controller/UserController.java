@@ -1,27 +1,46 @@
 package com.example.orderdemo.controller;
 
 import com.example.orderdemo.model.dto.UserDto;
-import org.springframework.http.ResponseEntity;
+import com.example.orderdemo.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1/users")
-public interface UserController {
+@RequestMapping("/users")
+@RequiredArgsConstructor
+public class UserController {
+
+    private final UserService userService;
 
     @GetMapping
-    ResponseEntity<List<UserDto>> getAllUsers();
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<UserDto> getAllUsers() {
+        return userService.getUserList();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public UserDto getUserById(@PathVariable UUID id) {
+        return userService.getUserById(id);
+    }
 
     @PostMapping
-    void createUser(UserDto user);
+    public void createUser(UserDto user) {
+        userService.createUser(user);
+    }
 
     @DeleteMapping("/{id}")
-    void deleteUser(@PathVariable Long id);
-
+    public void deleteUser(@PathVariable UUID id) {
+        userService.deleteUser(id);
+    }
 }

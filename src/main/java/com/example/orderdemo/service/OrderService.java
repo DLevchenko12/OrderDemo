@@ -3,6 +3,7 @@ package com.example.orderdemo.service;
 import com.example.orderdemo.model.dto.OrderDto;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface OrderService {
 
@@ -10,10 +11,10 @@ public interface OrderService {
 
     List<OrderDto> getOrderList();
 
-    List<OrderDto> getOrderListByUserId(Long userId);
+    List<OrderDto> getOrderListByUserId(UUID userId);
 
-    OrderDto getOrderById(Long orderId);
+    OrderDto getOrderById(UUID orderId);
 
-    void deleteOrder(Long orderId);
+    void deleteOrder(UUID orderId);
 
 }
