@@ -1,7 +1,7 @@
 package com.example.orderdemo.service.impl;
 
-import com.example.orderdemo.model.dto.UserDto;
 import com.example.orderdemo.mapper.UserMapper;
+import com.example.orderdemo.model.dto.UserDto;
 import com.example.orderdemo.repository.UserRepository;
 import com.example.orderdemo.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(UserDto user) {
-        userRepository.saveAndFlush(userMapper.mapToUser(user));
+        userRepository.save(userMapper.mapToUser(user));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserById(UUID id) {
-        return userRepository.findById(id);
+        return userMapper.mapToUserDto(userRepository.findById(id));
     }
 
     @Override
