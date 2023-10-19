@@ -25,5 +25,5 @@ public class ItemDto {
     private final BigDecimal price;
 
     @Schema(name = "order", description = "Orders owning this item.")
-    private Order order;
+    private final Order order;
 }
