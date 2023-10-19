@@ -1,6 +1,5 @@
 package com.example.orderdemo.model.dto;
 
-import com.example.orderdemo.model.entity.Order;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,12 +10,9 @@ import java.util.UUID;
  */
 @Data
 public class ItemDto {
-
     private final UUID id;
 
     private final String name;
 
     private final BigDecimal price;
-
-    private final Order order;
 }

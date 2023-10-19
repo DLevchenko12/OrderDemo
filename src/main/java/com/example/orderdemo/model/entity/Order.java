@@ -12,11 +12,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(
+        name = "orders",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "orders_name_key", columnNames = "id")
+        }
+)
 public class Order {
     @Id
     @GeneratedValue(generator = "UUID")

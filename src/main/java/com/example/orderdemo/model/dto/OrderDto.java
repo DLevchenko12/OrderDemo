@@ -4,13 +4,8 @@ import com.example.orderdemo.model.entity.Item;
 import com.example.orderdemo.model.entity.User;
 import com.example.orderdemo.model.enums.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
