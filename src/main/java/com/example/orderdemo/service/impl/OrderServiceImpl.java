@@ -3,6 +3,7 @@ package com.example.orderdemo.service.impl;
 import com.example.orderdemo.mapper.OrderMapper;
 import com.example.orderdemo.model.dto.OrderDto;
 import com.example.orderdemo.model.entity.Order;
+import com.example.orderdemo.model.enums.Status;
 import com.example.orderdemo.repository.OrderRepository;
 import com.example.orderdemo.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void createOrder(OrderDto order) {
-        orderRepository.save(orderMapper.mapToOrder(order));
+        OrderDto newOrder = new OrderDto(
+                order.getId(),
+                order.getUser(),
+                order.getItems(),
+                order.getCreationDate(),
+                Status.PENDING
+        );
+
+        orderRepository.save(orderMapper.mapToOrder(newOrder));
     }
 
     @Override
@@ -58,13 +67,36 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto updateOrder(OrderDto orderDto, UUID orderId) {
-        Order currentOrder = orderRepository.findById(orderId).orElseThrow(
-                () -> new EntityNotFoundException(MESSAGE + orderId)
-        );
+        Order currentOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException(MESSAGE + orderId)
+                );
         orderMapper.updateFromOrderDto(orderDto, currentOrder);
         orderRepository.save(currentOrder);
 
         return orderMapper.mapToOrderDto(currentOrder);
+    }
+
+    @Override
+    public OrderDto checkoutOrder(UUID orderId) {
+        OrderDto currentOrder = orderRepository.findById(orderId)
+                .map(orderMapper::mapToOrderDto)
+                .orElseThrow(() -> new EntityNotFoundException(MESSAGE + orderId)
+                );
+
+        OrderDto processedOrder = buildOrder(currentOrder);
+        orderRepository.save(orderMapper.mapToOrder(processedOrder));
+
+        return processedOrder;
+    }
+
+    private OrderDto buildOrder(OrderDto currentOrder) {
+        return new OrderDto(
+                currentOrder.getId(),
+                currentOrder.getUser(),
+                currentOrder.getItems(),
+                currentOrder.getCreationDate(),
+                Status.SUCCESS
+        );
     }
 
 

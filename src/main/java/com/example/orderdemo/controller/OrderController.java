@@ -45,4 +45,9 @@ public class OrderController {
     public OrderDto updateOrder(OrderDto orderDto, @PathVariable UUID orderId) {
         return orderService.updateOrder(orderDto, orderId);
     }
+
+    @GetMapping("/{orderId}/checkout")
+    public OrderDto checkoutOrder(@PathVariable UUID orderId) {
+        return orderService.checkoutOrder(orderId);
+    }
 }

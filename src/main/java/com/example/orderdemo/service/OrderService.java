@@ -19,4 +19,6 @@ public interface OrderService {
 
     OrderDto updateOrder(OrderDto orderDto, UUID orderId);
 
+    OrderDto checkoutOrder(UUID orderId);
+
 }
