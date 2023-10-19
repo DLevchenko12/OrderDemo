@@ -1,6 +1,10 @@
 package com.example.orderdemo.model.entity;
 
 import com.example.orderdemo.model.enums.Status;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
@@ -25,6 +29,10 @@ import java.util.UUID;
                 @UniqueConstraint(name = "orders_name_key", columnNames = "id")
         }
 )
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Order {
     @Id
     @GeneratedValue(generator = "UUID")
