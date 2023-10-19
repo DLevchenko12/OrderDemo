@@ -17,4 +17,6 @@ public interface OrderService {
 
     void deleteOrder(UUID orderId);
 
+    OrderDto updateOrder(OrderDto orderDto, UUID orderId);
+
 }
